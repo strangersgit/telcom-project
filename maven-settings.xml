@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Maven settings scoped to this project only.
+
+  The machine-wide settings at ~/.m2/settings.xml mirror every repository to an
+  internal Nexus host that is not reachable from this network, which makes the
+  build fail before it starts. Those settings are left untouched because other
+  work depends on them; this file simply resolves against Maven Central
+  instead, and is selected through .mvn/maven.config.
+
+  A separate local repository is used so artifacts downloaded here never mix
+  with the corporate ones already cached in ~/.m2/repository.
+-->
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <localRepository>${user.home}/.m2/repository-tsatms</localRepository>
+    <interactiveMode>false</interactiveMode>
+
+    <!-- Deliberately empty: no mirror should intercept Central. -->
+    <mirrors/>
+
+    <profiles>
+        <profile>
+            <id>central-direct</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <name>Maven Central</name>
+                    <url>https://repo.maven.apache.org/maven2</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>central</id>
+                    <name>Maven Central</name>
+                    <url>https://repo.maven.apache.org/maven2</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>central-direct</activeProfile>
+    </activeProfiles>
+
+</settings>

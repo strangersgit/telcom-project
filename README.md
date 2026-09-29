@@ -29,7 +29,8 @@ logging goes through `java.util.logging`.
 ### Step 1 — tell it about your database
 
 Everything configurable lives in `src/main/resources/application.properties`.
-Before the first run, set:
+The three password values ship blank on purpose — real ones are kept out of
+version control. Fill them in before the first run:
 
 | Property | What it is |
 |---|---|
